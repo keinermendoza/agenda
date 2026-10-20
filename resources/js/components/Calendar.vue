@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { router, Link } from '@inertiajs/vue3'
-import { show } from '@/routes/reservas'
+import { Link } from '@inertiajs/vue3'
+import { show, create } from '@/routes/reservas'
 
 import '@fullcalendar/vue3/skeleton.css'
 import '@fullcalendar/vue3/themes/monarch/theme.css'
@@ -24,6 +24,7 @@ import { Button } from '@/components/ui/button'
 import { Plus } from '@lucide/vue'
 
 import { ReservaCalendar } from '@/types/business'
+import { dataCurta } from '@/lib/utils'
 
 const { reservas } = defineProps<{
     reservas: ReservaCalendar[]
@@ -110,10 +111,10 @@ const calendarOptions = computed(() => ({
             </li>
         </ul>
         <div class="mt-4 flex justify-end">
-            <Button @click="adicionarEvento">
-                <Plus class="mr-2 size-4" />
-                Adicionar reserva
-            </Button>
+                <Link as="button" :href="create({ query: { data: dataSelecionada } }).url">
+                    <Plus class="mr-2 size-4" />
+                    Adicionar reserva
+                </Link>
         </div>
     </DialogContent>
 </Dialog>

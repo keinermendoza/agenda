@@ -6,6 +6,10 @@ use App\Models\Reserva;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Http\Resources\ReservaCalendarResource;
+use App\Models\Cliente;
+use App\Models\ReservaStatus;
+use Carbon\Carbon;
+
 class ReservaController extends Controller
 {
     /**
@@ -21,9 +25,18 @@ class ReservaController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $data = $request->query('data');
+        if ($data) {
+            $dataSelecionada = Carbon::parse($data)->format('Y-m-d\TH:i');
+        }
+
+        return Inertia::render('Reservas/Create', [
+            "dataSelecionada" => $dataSelecionada ?? '',
+            "clientes" => Cliente::all(),
+            "statuses" => ReservaStatus::all()
+        ]);
     }
 
     /**
@@ -31,7 +44,7 @@ class ReservaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
     }
 
     /**

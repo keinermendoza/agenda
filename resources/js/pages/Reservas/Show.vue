@@ -14,6 +14,7 @@ import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { Reserva } from '@/types/business'
 import { dataCurta, dataLonga, hora, moeda } from '@/lib/utils'
+
 defineOptions({
     layout: {
         breadcrumbs: [
@@ -23,7 +24,7 @@ defineOptions({
             },
             {
                 title: 'Reservas',
-                href: '/reservas',
+                href: index(),
             },
             {
                 title: 'Detalhes',
