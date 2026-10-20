@@ -47,7 +47,7 @@ class Reserva extends Model
     {
         return Attribute::make(
             get: fn () => $this->notas ?
-                Str::substr($this->notas, 0, 12)
+                Str::substr($this->notas, 0, 24)
                 : "(Sem titulo) reservado ". $this->created_at->locale('pt_BR')->translatedFormat('d M / H:m')
         );
     }

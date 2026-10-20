@@ -142,7 +142,7 @@ const { reserva } = defineProps<{
         <!-- Dados da reserva -->
         <Card>
             <CardHeader>
-                <CardTitle>Cliente y periódo</CardTitle>
+                <CardTitle>Outras informações</CardTitle>
             </CardHeader>
 
             <CardContent class="grid gap-6 sm:grid-cols-2">
@@ -157,9 +157,9 @@ const { reserva } = defineProps<{
                 </div>
 
                 <div class="space-y-1">
-                    <p class="text-sm text-muted-foreground">Status</p>
+                    <p class="text-sm text-muted-foreground">Personalizado</p>
                     <p class="font-medium">
-                        {{ reserva.status.tipo }}
+                        {{ reserva.personalizado ? 'Sim' : 'Não' }}
                     </p>
                 </div>
 

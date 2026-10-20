@@ -44,7 +44,30 @@ class ReservaController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        $validated = $request->validate([
+            'notas' => 'required|string',
+            'começo' => 'required|date',
+            'fim' => 'nullable|sometimes|date|after:começo',
+            'preço' => 'nullable|sometimes|numeric|min:0',
+            'cliente_id' => 'nullable|sometimes|exists:clientes,id',
+            'personalizado' => 'boolean'
+        ]);
+
+        // set defaults
+        if (!$request->filled('preço')) {
+            $validated['preço'] = 60;
+        }
+        if (!$request->filled('cliente_id')) {
+            $validated['cliente_id'] = Cliente::where('nome', 'Não informado')->first()->id;;
+        }
+        if (!$request->filled('fim')) {
+            $validated['fim'] = Carbon::parse($validated['começo'])->addDay()->setTime(20, 0, 0);
+        }
+        $validated["reserva_status_id"] = ReservaStatus::where('tipo', 'pendente')->first()->id;
+        Reserva::create($validated);
+
+        return to_route('reservas.index')
+            ->with('success', 'Reserva criada com sucesso.');
     }
 
     /**

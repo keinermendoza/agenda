@@ -27,7 +27,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
+        Cliente::factory()->create(['nome' => 'Não informado', 'telefone' => '000-0000']);
         $clientes = Cliente::factory()->count(10)->create();
+
 
         foreach($clientes as $cliente) {
             $endereço = Endereço::factory()->create();
