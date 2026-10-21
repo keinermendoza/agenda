@@ -15,7 +15,6 @@ import { dataCurta } from '@/lib/utils';
 defineOptions({
     layout: {
         breadcrumbs: [
-            { title: 'Menu', href: '#' },
             { title: 'Reservas', href: index().url },
             { title: 'Nova reserva', href: '#' },
         ],
@@ -45,8 +44,6 @@ const form = useForm({
     preço: '',
     valor_pago: '',
     personalizado: false,
-    cliente_id: '',
-    // reserva_status_id: '',
     notas: '',
 });
 
@@ -151,62 +148,10 @@ const submit = () => {
                 </div>
 
 
-                <div class="space-y-2">
-                    <Label for="cliente_id">Cliente</Label>
-
-                    <Select v-model="form.cliente_id">
-                        <SelectTrigger id="cliente_id" class="w-full">
-                            <SelectValue placeholder="Selecione um cliente" />
-                        </SelectTrigger>
-
-                        <SelectContent>
-                            <SelectItem
-                                v-for="cliente in props.clientes"
-                                :key="cliente.id"
-                                :value="String(cliente.id)"
-                            >
-                                {{ cliente.nome }}
-                            </SelectItem>
-                        </SelectContent>
-                    </Select>
-
-                    <p v-if="form.errors.cliente_id" class="text-sm text-destructive">
-                        {{ form.errors.cliente_id }}
-                    </p>
-                </div>
-
-
-                <!-- <div class="space-y-2">
-                    <Label for="reserva_status_id">Status da reserva</Label>
-
-                    <Select v-model="form.reserva_status_id">
-                        <SelectTrigger id="reserva_status_id" class="w-full">
-                            <SelectValue placeholder="Selecione um status" />
-                        </SelectTrigger>
-
-                        <SelectContent>
-                            <SelectItem
-                                v-for="status in props.statuses"
-                                :key="status.id"
-                                :value="String(status.id)"
-                            >
-                                {{ status.nome ?? status.nombre ?? status.name }}
-                            </SelectItem>
-                        </SelectContent>
-                    </Select>
-
-                    <p
-                        v-if="form.errors.reserva_status_id"
-                        class="text-sm text-destructive"
-                    >
-                        {{ form.errors.reserva_status_id }}
-                    </p>
-                </div> -->
-
                 <div class="flex items-start gap-3">
                     <Checkbox
                         id="personalizado"
-                        v-model:checked="form.personalizado"
+                        v-model="form.personalizado"
                     />
 
                     <div class="space-y-1">
@@ -227,55 +172,6 @@ const submit = () => {
                     </div>
                 </div>
             </section>
-<!--
-            <section class="space-y-6 rounded-xl border p-6">
-                <div>
-                    <h2 class="font-semibold">Valores e observações</h2>
-                    <p class="text-sm text-muted-foreground">
-                        Informe o preço, o pagamento e os detalhes adicionais.
-                    </p>
-                </div>
-
-                <div class="grid gap-6 sm:grid-cols-2">
-
-                                    <div class="space-y-2">
-                    <Label for="preço">Preço (R$)</Label>
-
-                    <Input
-                        id="preço"
-                        v-model="form.preço"
-                        type="number"
-                        min="0"
-                        step="0.01"
-
-                    />
-
-                    <p v-if="form.errors.preço" class="text-sm text-destructive">
-                        {{ form.errors.preço }}
-                    </p>
-                </div>
-
-
-                <div class="space-y-2">
-                    <Label for="valor_pago">Valor pago (R$)</Label>
-
-                    <Input
-                        id="valor_pago"
-                        v-model="form.valor_pago"
-                        type="number"
-                        min="0"
-                        step="0.01"
-                        required
-                    />
-
-                    <p v-if="form.errors.valor_pago" class="text-sm text-destructive">
-                        {{ form.errors.valor_pago }}
-                    </p>
-                </div>
-            </div>
-
-
-            </section> -->
 
             <div class="flex justify-end gap-3">
                 <Button

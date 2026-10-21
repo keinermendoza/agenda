@@ -1,6 +1,6 @@
 
 <script setup lang="ts">
-import { index, show } from '@/routes/reservas'
+import { index, edit } from '@/routes/reservas'
 import { Head, Link } from '@inertiajs/vue3'
 import { Button } from '@/components/ui/button'
 import {
@@ -19,15 +19,11 @@ defineOptions({
     layout: {
         breadcrumbs: [
             {
-                title: 'Menu',
-                href: index(),
-            },
-            {
                 title: 'Reservas',
                 href: index(),
             },
             {
-                title: 'Detalhes',
+                title: 'Ver reserva',
                 href: '#',
             },
         ],
@@ -74,7 +70,7 @@ const { reserva } = defineProps<{
                 </Button>
 
                 <Button as-child>
-                    <Link :href="show({reserva: reserva.id})">
+                    <Link :href="edit({reserva: reserva.id})">
                         Editar reserva
                     </Link>
                 </Button>
@@ -107,7 +103,7 @@ const { reserva } = defineProps<{
                     </CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <p class="text-sm text-muted-foreground text-red-500">
+                    <p class="text-sm text-red-500">
                         <template v-if="reserva.preço !== null && reserva.valor_pago !== null">
                             Aguardando o pago restate de:
                             {{ String(Number(reserva.preço) - Number(reserva.valor_pago)) }}

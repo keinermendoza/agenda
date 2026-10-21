@@ -76,7 +76,9 @@ class ReservaController extends Controller
     public function show(Reserva $reserva)
     {
         $reserva->loadMissing(['cliente', 'status']);
-        return Inertia::render('Reservas/Show', ['reserva' => $reserva]);
+        return Inertia::render('Reservas/Show', [
+            'reserva' => $reserva,
+        ]);
     }
 
     /**
@@ -84,7 +86,11 @@ class ReservaController extends Controller
      */
     public function edit(Reserva $reserva)
     {
-        //
+        return Inertia::render('Reservas/Edit', [
+            'reserva' => $reserva,
+            "clientes" => Cliente::all(),
+            "statuses" => ReservaStatus::all()
+        ]);
     }
 
     /**
@@ -92,7 +98,20 @@ class ReservaController extends Controller
      */
     public function update(Request $request, Reserva $reserva)
     {
-        //
+        $validated = $request->validate([
+            'notas' => 'required|string',
+            'começo' => 'required|date',
+            'fim' => 'required|date|after:começo',
+            'preço' => 'required|numeric|min:0',
+            'valor_pago' => 'required|numeric|min:0',
+            'cliente_id' => 'required|exists:clientes,id',
+            'reserva_status_id' => 'required|exists:reserva_statuses,id',
+            'personalizado' => 'boolean'
+        ]);
+
+        $reserva->update($validated);
+        return to_route('reservas.show',['reserva' => $reserva])
+            ->with('success', 'Reserva atualizada com sucesso.');
     }
 
     /**

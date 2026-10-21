@@ -10,7 +10,7 @@ import FullCalendar from '@fullcalendar/vue3'
 import themePlugin from '@fullcalendar/vue3/themes/monarch'
 import dayGridPlugin from '@fullcalendar/vue3/daygrid'
 import interactionPlugin from '@fullcalendar/vue3/interaction'
-
+import { dataLonga } from '@/lib/utils'
 
 import {
     Dialog,
@@ -104,7 +104,7 @@ const calendarOptions = computed(() => ({
                         </div>
 
                         <span class="shrink-0 text-sm text-muted-foreground">
-                            {{ reserva.start }}
+                            {{ dataLonga(reserva.start) }}
                         </span>
                     </div>
                 </Link>
