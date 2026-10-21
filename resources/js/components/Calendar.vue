@@ -24,7 +24,6 @@ import { Button } from '@/components/ui/button'
 import { Plus } from '@lucide/vue'
 
 import { ReservaCalendar } from '@/types/business'
-import { dataCurta } from '@/lib/utils'
 
 const { reservas } = defineProps<{
     reservas: ReservaCalendar[]
@@ -33,17 +32,17 @@ const { reservas } = defineProps<{
 const modalVisible = ref(false)
 const dataSelecionada = ref('')
 
-function handleDateClick(info: { dateStr: string }) {
-    dataSelecionada.value = info.dateStr
+function abrirModal(data: string) {
+    dataSelecionada.value = data
     modalVisible.value = true
 }
 
-function adicionarEvento() {
-    console.log('data selecionada ' + dataSelecionada.value)
+function handleDataClick(info: { dataStr: string }) {
+    abrirModal(info.dataStr)
+}
 
-    // router.get('/eventos/create', {
-    //     data: dataSelecionada.value,
-    // })
+function handleReservaClick(info: { event: { startStr: string } }) {
+    abrirModal(info.event.startStr.slice(0, 10))
 }
 
 const reservasDoDia = computed(() => {
@@ -56,7 +55,8 @@ const calendarOptions = computed(() => ({
     initialView: 'dayGridMonth',
     locale: 'pt-br',
     events: reservas,
-    dateClick: handleDateClick,
+    dateClick: handleDataClick,
+    eventClick: handleReservaClick,
 }))
 </script>
 
@@ -111,10 +111,13 @@ const calendarOptions = computed(() => ({
             </li>
         </ul>
         <div class="mt-4 flex justify-end">
-                <Link as="button" :href="create({ query: { data: dataSelecionada } }).url">
+            <Button as-child>
+
+                <Link :href="create({ query: { data: dataSelecionada } }).url">
                     <Plus class="mr-2 size-4" />
                     Adicionar reserva
                 </Link>
+            </Button>
         </div>
     </DialogContent>
 </Dialog>

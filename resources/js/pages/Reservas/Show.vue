@@ -13,7 +13,8 @@ import {
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { Reserva } from '@/types/business'
-import { dataCurta, dataLonga, hora, moeda } from '@/lib/utils'
+import { dataCurta, dataLonga } from '@/lib/utils'
+import ReservaDeleteButton from '@/components/ReservaDeleteButton.vue'
 
 defineOptions({
     layout: {
@@ -181,5 +182,7 @@ const { reserva } = defineProps<{
         >
             Última atualização: {{ dataLonga(reserva.updated_at) }}
         </p>
+
+        <ReservaDeleteButton :reserva-id="reserva.id" />
     </div>
 </template>
