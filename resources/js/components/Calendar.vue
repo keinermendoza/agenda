@@ -10,7 +10,7 @@ import FullCalendar from '@fullcalendar/vue3'
 import themePlugin from '@fullcalendar/vue3/themes/monarch'
 import dayGridPlugin from '@fullcalendar/vue3/daygrid'
 import interactionPlugin from '@fullcalendar/vue3/interaction'
-import { dataLonga } from '@/lib/utils'
+import { dataLonga, hora } from '@/lib/utils'
 
 import {
     Dialog,
@@ -37,8 +37,8 @@ function abrirModal(data: string) {
     modalVisible.value = true
 }
 
-function handleDataClick(info: { dataStr: string }) {
-    abrirModal(info.dataStr)
+function handleDataClick(info: { dateStr: string }) {
+    abrirModal(info.dateStr)
 }
 
 function handleReservaClick(info: { event: { startStr: string } }) {
