@@ -15,11 +15,26 @@ class ReservaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        // reservas do mês atual
-        $reservas = Reserva::where('começo', '>=', now()->startOfMonth())->where('fim', '<=', now()->endOfMonth())->get();
-        return Inertia::render('Dashboard', ['reservas' => ReservaCalendarResource::collection($reservas)->resolve()]);
+        $validated = $request->validate([
+            'mesTexto' => ['nullable', 'date_format:Y-m'],
+        ]);
+
+        $mesTexto = $validated['mesTexto'] ?? now()->format('Y-m');
+
+        $data = Carbon::createFromFormat('!Y-m', $mesTexto);
+
+        // Margem de uma semana
+        $começo = $data->copy()->startOfMonth()->subWeek();
+        $fim   = $data->copy()->endOfMonth()->addWeek();
+
+        // obtendo reservas
+        $reservas = Reserva::where('começo', '>=', $começo)->where('fim', '<=', $fim)->get();
+        return Inertia::render('Dashboard', [
+            'reservas' => ReservaCalendarResource::collection($reservas)->resolve(),
+            'mesTexto' => $mesTexto
+        ]);
     }
 
     /**

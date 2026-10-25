@@ -40,7 +40,7 @@ export function hora(data: string | null): string {
 
     if (Number.isNaN(dataValida.getTime())) return data
 
-    return formatDate(dataValida, 'HH:mm')
+    return formatDate(dataValida, 'HH:mm a')
 }
 
 

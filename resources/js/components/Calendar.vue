@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { Link } from '@inertiajs/vue3'
-import { show, create } from '@/routes/reservas'
+import { Link, router } from '@inertiajs/vue3'
+import { show, create, index } from '@/routes/reservas'
 
 import '@fullcalendar/vue3/skeleton.css'
 import '@fullcalendar/vue3/themes/monarch/theme.css'
@@ -25,8 +25,9 @@ import { Plus } from '@lucide/vue'
 
 import { ReservaCalendar } from '@/types/business'
 
-const { reservas } = defineProps<{
-    reservas: ReservaCalendar[]
+const props = defineProps<{
+    reservas: ReservaCalendar[],
+    mesTexto?: string
 }>()
 
 const modalVisible = ref(false)
@@ -46,17 +47,47 @@ function handleReservaClick(info: { event: { startStr: string } }) {
 }
 
 const reservasDoDia = computed(() => {
-    return reservas.filter(reserva =>
+    return props.reservas.filter(reserva =>
         reserva.start.slice(0, 10) === dataSelecionada.value
     )
 })
+
+function onDatesSet(info: DatesSetArg) {
+  // currentStart = primer día del mes mostrado (no el de la semana previa)
+  const d = info.view.currentStart
+  const mesRenderizado = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`
+
+  // Si el mes visible ya es el que tenemos del servidor, no pedir nada
+  if (mesRenderizado === props.mesTexto) return
+
+  router.get(
+    index(),
+    { 'mesTexto' : mesRenderizado },
+    {
+      only: ['reservas', 'mesTexto'],
+      preserveState: true,
+      preserveScroll: true,
+      replace: true,
+    },
+  )
+}
+
 const calendarOptions = computed(() => ({
     plugins: [themePlugin, dayGridPlugin, interactionPlugin],
     initialView: 'dayGridMonth',
     locale: 'pt-br',
-    events: reservas,
+    events: props.reservas,
+    datesSet: onDatesSet,
     dateClick: handleDataClick,
     eventClick: handleReservaClick,
+    headerToolbar: {
+    left: 'prev,next today',
+    center: 'title',
+    right: '',
+  },
+  buttonText: {
+    today: 'Hoy',
+  },
 }))
 </script>
 
@@ -98,13 +129,15 @@ const calendarOptions = computed(() => ({
                                 {{ reserva.title }}
                             </h3>
 
+                            <!--
+                            TODO: deixando implementação de cliente para segunda versão
                             <p class="mt-1 text-sm text-muted-foreground">
-                                {{ reserva.cliente }}
-                            </p>
+                                <span>Cliente: </span>{{ reserva.cliente }}
+                            </p> -->
                         </div>
 
                         <span class="shrink-0 text-sm text-muted-foreground">
-                            {{ dataLonga(reserva.start) }}
+                            {{ hora(reserva.start) }}
                         </span>
                     </div>
                 </Link>

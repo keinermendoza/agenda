@@ -143,6 +143,8 @@ const { reserva } = defineProps<{
             </CardHeader>
 
             <CardContent class="grid gap-6 sm:grid-cols-2">
+                <!--
+                TODO: deixando implementação de cliente para segunda versão
                 <div class="space-y-1">
                     <p class="text-sm text-muted-foreground">Cliente</p>
                     <p >
@@ -151,7 +153,7 @@ const { reserva } = defineProps<{
                     <p >
                         {{ reserva.cliente.telefone }}
                     </p>
-                </div>
+                </div> -->
 
                 <div class="space-y-1">
                     <p class="text-sm text-muted-foreground">Personalizado</p>

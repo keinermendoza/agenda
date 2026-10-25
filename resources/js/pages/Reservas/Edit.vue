@@ -188,6 +188,8 @@ const submit = () => {
             </section>
 
             <!-- CLIENTE -->
+            <!--
+            TODO: deixando cliente para segunda versão
             <section class="space-y-6 rounded-xl border p-6">
                 <div>
                     <h2 class="font-semibold">Cliente</h2>
@@ -198,22 +200,6 @@ const submit = () => {
 
                 <div class="space-y-2">
                     <Label for="cliente_id">Selecionar cliente</Label>
-
-                    <!-- <Select v-model="form.cliente_id">
-                        <SelectTrigger id="cliente_id" class="w-full">
-                            <SelectValue placeholder="Selecione um cliente" />
-                        </SelectTrigger>
-
-                        <SelectContent>
-                            <SelectItem
-                                v-for="cliente in props.clientes"
-                                :key="cliente.id"
-                                :value="cliente.id"
-                            >
-                                {{ cliente.nome }}
-                            </SelectItem>
-                        </SelectContent>
-                    </Select> -->
 
                     <ComboboxField
                         id="cliente_id"
@@ -232,7 +218,7 @@ const submit = () => {
                         {{ form.errors.cliente_id }}
                     </p>
                 </div>
-            </section>
+            </section> -->
 
             <!-- STATUS & PERSONALIZADO -->
             <section class="space-y-6 rounded-xl border p-6">
