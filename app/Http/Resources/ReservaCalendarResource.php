@@ -18,7 +18,7 @@ class ReservaCalendarResource extends JsonResource
         return [
             "id" => $this->id,
             "cliente" => $this->cliente->nome ?? "não especificado",
-            "status" => $this->status->tipo,
+            "status_id" => $this->status->id,
             "start" => $this->começo,
             "end" => $this->fim,
             "title" => $this->titulo,

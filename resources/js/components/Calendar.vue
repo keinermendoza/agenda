@@ -46,13 +46,14 @@ function handleReservaClick(info: { event: { startStr: string } }) {
     abrirModal(info.event.startStr.slice(0, 10))
 }
 
+// para mostrar me modal
 const reservasDoDia = computed(() => {
     return props.reservas.filter(reserva =>
         reserva.start.slice(0, 10) === dataSelecionada.value
     )
 })
 
-function onDatesSet(info: DatesSetArg) {
+function onDatesSet(info) {
   // currentStart = primer día del mes mostrado (no el de la semana previa)
   const d = info.view.currentStart
   const mesRenderizado = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`
@@ -72,11 +73,37 @@ function onDatesSet(info: DatesSetArg) {
   )
 }
 
+const coresPorStatus = {
+  1: {
+    tag: 'pendente',
+    color:'#3b82f6'
+  },
+  2: {
+    tag: 'confirmado',
+    color: '#22c55e'
+  },
+  3: {
+    tag:'arte pronta',
+    color: '#f59e0b',
+  },
+  4: {
+    tag: 'retiró decoração',
+    color: '#ef4444',
+  }
+}
+
+const reservasComEstilos = computed(() =>
+  props.reservas.map(r => ({
+    ...r,
+    color: coresPorStatus[r.status_id]?.color ?? '#6b7280',
+  })),
+)
+
 const calendarOptions = computed(() => ({
     plugins: [themePlugin, dayGridPlugin, interactionPlugin],
     initialView: 'dayGridMonth',
     locale: 'pt-br',
-    events: props.reservas,
+    events: reservasComEstilos.value,
     datesSet: onDatesSet,
     dateClick: handleDataClick,
     eventClick: handleReservaClick,
@@ -93,6 +120,13 @@ const calendarOptions = computed(() => ({
 
 <template>
     <FullCalendar :options="calendarOptions" />
+
+    <ul class="mt-4 space-y-2">
+        <li class="w-fit flex items-center gap-2" v-for="status in coresPorStatus">
+            <div class="size-4 rounded-full" :style="{ backgroundColor: status.color }"></div>
+            <span class="h-full text-sm text-black/70">{{ status.tag }}</span>
+        </li>
+    </ul>
 
     <Dialog v-model:open="modalVisible">
     <DialogContent>

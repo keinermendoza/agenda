@@ -1,7 +1,7 @@
 export type ReservaCalendar = {
     id: number
     cliente: string
-    status: string
+    status_id: number
     start: string
     end: string | null
     title: string | null

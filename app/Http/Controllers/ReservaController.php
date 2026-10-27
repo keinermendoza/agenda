@@ -79,9 +79,9 @@ class ReservaController extends Controller
             $validated['fim'] = Carbon::parse($validated['começo'])->addDay()->setTime(20, 0, 0);
         }
         $validated["reserva_status_id"] = ReservaStatus::where('tipo', 'pendente')->first()->id;
-        Reserva::create($validated);
+        $reserva = Reserva::create($validated);
 
-        return to_route('reservas.index')
+        return to_route('reservas.show', ['reserva' => $reserva])
             ->with('success', 'Reserva criada com sucesso.');
     }
 

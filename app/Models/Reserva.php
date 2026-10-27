@@ -43,6 +43,18 @@ class Reserva extends Model
     use HasFactory;
 
     protected $appends = ['titulo'];
+
+    protected function casts(): array
+    {
+        return [
+            'começo' => 'datetime',
+            'fim' => 'datetime',
+            'preço' => 'decimal:2',
+            'valor_pago' => 'decimal:2',
+            'personalizado' => 'boolean',
+        ];
+    }
+
     protected function titulo(): Attribute
     {
         return Attribute::make(
