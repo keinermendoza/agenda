@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReservaController;
-Route::inertia('/', 'Welcome')->name('home');
+Route::redirect('/', 'internal')->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('internal')->group(function () {
