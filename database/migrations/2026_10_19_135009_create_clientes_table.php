@@ -17,7 +17,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('nome');
             $table->string('telefone')->nullable();
-            $table->date('data_contato')->default(DB::raw('CURRENT_DATE'));
+            $table->date('data_contato')->default(DB::raw('(CURRENT_DATE)'));
         });
     }
 
