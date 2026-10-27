@@ -10,7 +10,13 @@ import Button from '@/components/ui/button/Button.vue';
 import Input from '@/components/ui/input/Input.vue';
 import Checkbox from '@/components/ui/checkbox/Checkbox.vue';
 import { dataCurta } from '@/lib/utils';
-
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from '@/components/ui/card'
 
 defineOptions({
     layout: {
@@ -71,7 +77,7 @@ const submit = () => {
         </div>
 
         <form @submit.prevent="submit" class="space-y-6">
-            <section class="space-y-6 rounded-xl border p-6">
+            <Card class="space-y-6 rounded-xl border p-6">
 
                 <div class="space-y-2">
                     <Label class="font-semibold text-lg" for="notas">Informações</Label>
@@ -89,9 +95,9 @@ const submit = () => {
                         {{ form.errors.notas }}
                     </p>
                 </div>
-            </section>
+            </Card>
 
-            <section class="space-y-6 rounded-xl border p-6">
+            <Card class="space-y-6 rounded-xl border p-6">
                 <div>
                     <h2 class="font-semibold">Dados da reserva</h2>
                     <p class="text-sm text-muted-foreground">
@@ -171,7 +177,7 @@ const submit = () => {
                         </p>
                     </div>
                 </div>
-            </section>
+            </Card>
 
             <div class="flex justify-end gap-3">
                 <Button

@@ -30,7 +30,7 @@ export function dataLonga(data: string | null): string {
 
     if (Number.isNaN(dataValida.getTime())) return data
 
-    return formatDate(dataValida, 'DD [de] MMMM [do] YYYY [ás] HH:mm')
+    return formatDate(dataValida, 'DD [de] MMMM [ás] HH:mm a')
 }
 
 export function hora(data: string | null): string {

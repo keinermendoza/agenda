@@ -14,7 +14,7 @@ import SelectContent from '@/components/ui/select/SelectContent.vue';
 import SelectItem from '@/components/ui/select/SelectItem.vue';
 import SelectTrigger from '@/components/ui/select/SelectTrigger.vue';
 import SelectValue from '@/components/ui/select/SelectValue.vue';
-
+import Card from '@/components/ui/card/Card.vue';
 import ComboxField from '@/components/ComboxField.vue';
 
 defineOptions({
@@ -80,7 +80,7 @@ const submit = () => {
         </div>
 
         <form @submit.prevent="submit" class="space-y-6">
-            <section class="space-y-6 rounded-xl border p-6">
+            <Card class="space-y-6 rounded-xl border p-6">
                 <div class="space-y-2">
                     <Label class="font-semibold text-lg" for="notas">
                         Informações
@@ -99,10 +99,10 @@ const submit = () => {
                         {{ form.errors.notas }}
                     </p>
                 </div>
-            </section>
+            </Card>
 
             <!-- PREÇOS -->
-            <section class="space-y-6 rounded-xl border p-6">
+            <Card class="space-y-6 rounded-xl border p-6">
                 <div>
                     <h2 class="font-semibold">Recebimento de pago</h2>
                     <p class="text-sm text-muted-foreground">
@@ -143,10 +143,10 @@ const submit = () => {
                         </p>
                     </div>
                 </div>
-            </section>
+            </Card>
 
             <!-- DATAS -->
-            <section class="space-y-6 rounded-xl border p-6">
+            <Card class="space-y-6 rounded-xl border p-6">
                 <div>
                     <h2 class="font-semibold">Data da reserva</h2>
 
@@ -185,7 +185,7 @@ const submit = () => {
                         </p>
                     </div>
                 </div>
-            </section>
+            </Card>
 
             <!-- CLIENTE -->
             <!--
@@ -221,7 +221,7 @@ const submit = () => {
             </section> -->
 
             <!-- STATUS & PERSONALIZADO -->
-            <section class="space-y-6 rounded-xl border p-6">
+            <Card class="space-y-6 rounded-xl border p-6">
                 <div>
                     <h2 class="font-semibold">Status e personalização</h2>
 
@@ -280,7 +280,7 @@ const submit = () => {
                         </p>
                     </div>
                 </div>
-            </section>
+            </Card>
 
             <div class="flex justify-end gap-3">
                 <Button
