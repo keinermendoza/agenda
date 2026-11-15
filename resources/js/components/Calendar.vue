@@ -30,6 +30,7 @@ const props = defineProps<{
     mesTexto?: string
 }>()
 
+
 const modalVisible = ref(false)
 const dataSelecionada = ref('')
 
@@ -65,7 +66,7 @@ function onDatesSet(info) {
     index(),
     { 'mesTexto' : mesRenderizado },
     {
-      only: ['reservas', 'mesTexto'],
+      only: ['reservas', 'mesTexto', 'ingresos'],
       preserveState: true,
       preserveScroll: true,
       replace: true,
@@ -120,6 +121,7 @@ const calendarOptions = computed(() => ({
 
 <template>
     <FullCalendar :options="calendarOptions" />
+
 
     <ul class="mt-4 space-y-2">
         <li class="w-fit flex items-center gap-2" v-for="status in coresPorStatus">

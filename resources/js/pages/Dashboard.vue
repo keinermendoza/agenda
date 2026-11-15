@@ -3,6 +3,8 @@ import { Head } from '@inertiajs/vue3';
 import PlaceholderPattern from '@/components/PlaceholderPattern.vue';
 import { dashboard } from '@/routes';
 import Calendar from '@/components/Calendar.vue';
+import ReservaStats from '@/components/ReservaStats.vue'
+
 import { ReservaCalendar } from '@/types/business';
 defineOptions({
     layout: {
@@ -15,8 +17,10 @@ defineOptions({
     },
 });
 
-const { reservas } = defineProps<{
-    reservas: ReservaCalendar[]
+const props = defineProps<{
+    reservas: ReservaCalendar[],
+    mesTexto?: string,
+    ingresos?: number
 }>()
 
 </script>
@@ -28,7 +32,10 @@ const { reservas } = defineProps<{
         class="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4"
     >
         <div>
-            <Calendar :reservas="reservas" />
+            <ReservaStats :ingresos="props.ingresos" />
+        </div>
+        <div>
+            <Calendar :reservas="props.reservas" />
         </div>
         <div
             class="relative min-h-[100vh] flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border"
