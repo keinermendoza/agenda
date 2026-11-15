@@ -66,7 +66,7 @@ function onDatesSet(info) {
     index(),
     { 'mesTexto' : mesRenderizado },
     {
-      only: ['reservas', 'mesTexto', 'ingresos'],
+      only: ['reservas', 'mesTexto', 'ingressos'],
       preserveState: true,
       preserveScroll: true,
       replace: true,

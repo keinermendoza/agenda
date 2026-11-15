@@ -20,7 +20,7 @@ defineOptions({
 const props = defineProps<{
     reservas: ReservaCalendar[],
     mesTexto?: string,
-    ingresos?: number
+    ingressos?: number
 }>()
 
 </script>
@@ -32,7 +32,7 @@ const props = defineProps<{
         class="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4"
     >
         <div>
-            <ReservaStats :ingresos="props.ingresos" />
+            <ReservaStats :ingressos="props.ingressos" />
         </div>
         <div>
             <Calendar :reservas="props.reservas" />

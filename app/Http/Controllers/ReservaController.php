@@ -31,12 +31,12 @@ class ReservaController extends Controller
 
         // obtendo reservas
         $reservas = Reserva::where('começo', '>=', $começo)->where('fim', '<=', $fim)->get();
-        $ingresos = $reservas->sum('valor_pago');
+        $ingressos = $reservas->sum('valor_pago');
 
         return Inertia::render('Dashboard', [
             'reservas' => ReservaCalendarResource::collection($reservas)->resolve(),
             'mesTexto' => $mesTexto,
-            'ingresos' => $ingresos
+            'ingressos' => $ingressos
         ]);
     }
 

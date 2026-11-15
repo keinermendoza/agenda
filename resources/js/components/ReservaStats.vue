@@ -3,16 +3,15 @@ import {
     Card,
 } from '@/components/ui/card'
 interface Props {
-    ingresos?: number
+    ingressos?: number
 }
 
 const props = defineProps<Props>();
-console.log(props)
 </script>
 
 <template>
     <Card class="p-6 w-fit gap-2">
-        <p class="font-light italic">Ingresos do Mês</p>
-        <p class="text-[hsl(335,89%,50%)] text-2xl font-bold">{{props.ingresos}}</p>
+        <p class="font-light italic">Ingressos do Mês</p>
+        <p class="text-[hsl(335,89%,50%)] text-2xl font-bold">{{props.ingressos}}</p>
     </Card>
 </template>
